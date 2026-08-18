@@ -1,0 +1,4 @@
+interface:
+  display_name: "软件全周期交付"
+  short_description: "从需求对齐、编码验证到生产发布、烟测与回滚的完整闭环"
+  default_prompt: "使用 $ship-software-end-to-end 按当前授权边界完成需求对齐、实现与验证，并在获准时发布和验收。"
