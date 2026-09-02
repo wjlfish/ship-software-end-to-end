@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 SKIP_DIRS = {
     ".git",
     ".hg",
