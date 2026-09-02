@@ -3,7 +3,7 @@
 [![验证 Skill](https://github.com/wjlfish/ship-software-end-to-end/actions/workflows/validate.yml/badge.svg)](https://github.com/wjlfish/ship-software-end-to-end/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-一个面向 Codex 的通用软件全周期交付 Skill。它把需求对齐、代码与生产基线、根因定位、最小实现、风险自适应测试、CI、不可变制品、部署、烟测、回滚、观察和交接串成一条可验证的闭环。
+一个同时面向 Codex 与 Claude Code 的通用软件全周期交付 Skill。它遵循双方支持的 Agent Skills `SKILL.md` 结构，把需求对齐、代码与生产基线、根因定位、最小实现、风险自适应测试、CI、不可变制品、部署、烟测、回滚、观察和交接串成一条可验证的闭环。
 
 它不绑定语言、框架、云厂商或分支模型，而是优先从目标项目的仓库指令、脚本、CI 和运行环境中发现真实交付方式。
 
@@ -18,35 +18,43 @@
 
 ## 安装
 
-### 使用 Codex Skill Installer
+### Codex：使用 Skill Installer
 
 在 Codex 中输入：
 
 ```text
-$skill-installer 从 https://github.com/wjlfish/ship-software-end-to-end/tree/v1.0.1/skills/ship-software-end-to-end 安装这个 Skill
+$skill-installer 从 https://github.com/wjlfish/ship-software-end-to-end/tree/v1.1.0/skills/ship-software-end-to-end 安装这个 Skill
 ```
 
-### 手动安装
+### Codex 与 Claude Code：共用一个本地仓库
 
-Codex 官方文档当前推荐把用户级 Skill 放在 `$HOME/.agents/skills`。以下方式保留 Git 仓库，便于后续更新：
+Codex 从 `$HOME/.agents/skills` 发现用户级 Skill，Claude Code 从 `$HOME/.claude/skills` 发现个人 Skill。以下方式只保留一份 Git 仓库，并让两个工具指向同一份 Skill 源码：
 
 ```bash
-git clone --branch v1.0.1 --depth 1 \
+git clone --branch v1.1.0 --depth 1 \
   https://github.com/wjlfish/ship-software-end-to-end.git \
-  "$HOME/.agents/ship-software-end-to-end"
-mkdir -p "$HOME/.agents/skills"
-ln -s "$HOME/.agents/ship-software-end-to-end/skills/ship-software-end-to-end" \
+  "$HOME/.local/share/ship-software-end-to-end"
+mkdir -p "$HOME/.agents/skills" "$HOME/.claude/skills"
+ln -s "$HOME/.local/share/ship-software-end-to-end/skills/ship-software-end-to-end" \
   "$HOME/.agents/skills/ship-software-end-to-end"
+ln -s "$HOME/.local/share/ship-software-end-to-end/skills/ship-software-end-to-end" \
+  "$HOME/.claude/skills/ship-software-end-to-end"
 ```
 
-Codex 会自动发现 Skill；若没有立即出现，重启 Codex。上面的精确标签保证安装内容可复现；`main` 分支用于查看下一版变更。目录约定与调用方式参见 [OpenAI 官方 Skill 文档](https://learn.chatgpt.com/docs/build-skills)。
+Codex 显式调用名为 `$ship-software-end-to-end`，Claude Code 显式调用名为 `/ship-software-end-to-end`；两者也都可根据 `description` 自动加载。若工具没有立即发现新建的顶层目录，重启对应客户端。上面的精确标签保证安装内容可复现；`main` 分支用于查看下一版变更。目录约定与调用方式参见 [OpenAI 官方 Skill 文档](https://learn.chatgpt.com/docs/build-skills)和 [Claude Code 官方 Skill 文档](https://code.claude.com/docs/en/slash-commands)。
 
 ## 使用
 
-显式调用：
+Codex 显式调用：
 
 ```text
 使用 $ship-software-end-to-end 实现这个功能，完成测试并发布到生产。
+```
+
+Claude Code 显式调用：
+
+```text
+/ship-software-end-to-end 实现这个功能，完成测试并发布到生产。
 ```
 
 也可以直接提出与描述匹配的自然语言任务，例如：
