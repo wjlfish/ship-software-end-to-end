@@ -15,6 +15,7 @@
 - 从同一 commit 构建并晋升不可变制品
 - 完成部署、版本复核、烟测、观察和可执行回滚
 - 在用户只要求说明、评审或诊断时严格保持只读，不擅自扩张为发布
+- 用户在执行中明确催促时，冻结范围、保留最低硬闸门并走最短安全交付路径
 
 ## 安装
 
@@ -23,7 +24,7 @@
 在 Codex 中输入：
 
 ```text
-$skill-installer 从 https://github.com/wjlfish/ship-software-end-to-end/tree/v1.1.0/skills/ship-software-end-to-end 安装这个 Skill
+$skill-installer 从 https://github.com/wjlfish/ship-software-end-to-end/tree/v1.2.0/skills/ship-software-end-to-end 安装这个 Skill
 ```
 
 ### Codex 与 Claude Code：共用一个本地仓库
@@ -31,7 +32,7 @@ $skill-installer 从 https://github.com/wjlfish/ship-software-end-to-end/tree/v1
 Codex 从 `$HOME/.agents/skills` 发现用户级 Skill，Claude Code 从 `$HOME/.claude/skills` 发现个人 Skill。以下方式只保留一份 Git 仓库，并让两个工具指向同一份 Skill 源码：
 
 ```bash
-git clone --branch v1.1.0 --depth 1 \
+git clone --branch v1.2.0 --depth 1 \
   https://github.com/wjlfish/ship-software-end-to-end.git \
   "$HOME/.local/share/ship-software-end-to-end"
 mkdir -p "$HOME/.agents/skills" "$HOME/.claude/skills"
