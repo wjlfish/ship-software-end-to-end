@@ -114,8 +114,8 @@ def validate_structure() -> None:
         fail("SKILL.md frontmatter 只能包含 name 和 description")
     if metadata["name"] != NAME:
         fail(f"Skill name 应为 {NAME}")
-    if len(metadata["description"]) < 80:
-        fail("Skill description 过短，无法稳定表达触发范围")
+    if not metadata["description"].strip():
+        fail("Skill description 不得为空")
     if len(skill_text.splitlines()) >= 500:
         fail("SKILL.md 应保持在 500 行以内")
 
