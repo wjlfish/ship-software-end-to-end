@@ -17,6 +17,12 @@
 - 在用户只要求说明、评审或诊断时严格保持只读，不擅自扩张为发布
 - 用户在执行中明确催促时，冻结可选范围、保留最低硬闸门并走最短完成路径，不以半成品交差
 
+## 设计原则（v1.4.0）
+
+完成原任务是底线；催促只削减可选工作。主体按需路由，不设探查/测试配额、不要求固定五阶段或代理轮次；测试按风险选择，保留授权、数据安全、required CI 与真实发布验收。
+
+调整依据：[OpenAI Model Guidance](https://developers.openai.com/api/docs/guides/latest-model) 与 [Eric Provencher 的实践文章](https://x.com/pvncher/status/2095991462416490862)。核心文件与参考资料不绑定特定模型或工具；`agents/openai.yaml` 仅提供 Codex UI 元数据。
+
 ## 安装
 
 ### Codex：使用 Skill Installer
@@ -24,7 +30,7 @@
 在 Codex 中输入：
 
 ```text
-$skill-installer 从 https://github.com/wjlfish/ship-software-end-to-end/tree/v1.3.0/skills/ship-software-end-to-end 安装这个 Skill
+$skill-installer 从 https://github.com/wjlfish/ship-software-end-to-end/tree/v1.4.0/skills/ship-software-end-to-end 安装这个 Skill
 ```
 
 ### Codex 与 Claude Code：共用一个本地仓库
@@ -32,7 +38,7 @@ $skill-installer 从 https://github.com/wjlfish/ship-software-end-to-end/tree/v1
 Codex 从 `$HOME/.agents/skills` 发现用户级 Skill，Claude Code 从 `$HOME/.claude/skills` 发现个人 Skill。以下方式只保留一份 Git 仓库，并让两个工具指向同一份 Skill 源码：
 
 ```bash
-git clone --branch v1.3.0 --depth 1 \
+git clone --branch v1.4.0 --depth 1 \
   https://github.com/wjlfish/ship-software-end-to-end.git \
   "$HOME/.local/share/ship-software-end-to-end"
 mkdir -p "$HOME/.agents/skills" "$HOME/.claude/skills"
